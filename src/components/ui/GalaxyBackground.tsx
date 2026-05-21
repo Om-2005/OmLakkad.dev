@@ -83,16 +83,26 @@ export function GalaxyBackground() {
       "rgba(165, 243, 252, ",
     ];
 
+    let lastWidth = 0;
+
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+
+      canvas.width = newWidth;
+      canvas.height = newHeight;
       // Keep moon fully visible: pad by radius + parallax max-shift (≈20px) from every edge
       const pad = moon.radius + 24;
       moon.baseX = canvas.width - pad;   // hug the right edge
       moon.baseY = pad;                  // hug the top edge
       moon.currentX = moon.baseX;
       moon.currentY = moon.baseY;
-      initStars();
+      
+      // Prevent re-initializing stars on mobile scroll (where only height changes slightly due to URL bar)
+      if (lastWidth !== newWidth) {
+        initStars();
+        lastWidth = newWidth;
+      }
     };
 
     const initStars = () => {
@@ -273,9 +283,8 @@ export function GalaxyBackground() {
         star.alpha += star.twinkleSpeed;
         if (star.alpha > 1 || star.alpha < 0.15) star.twinkleSpeed = -star.twinkleSpeed;
         ctx.fillStyle = `${star.color}${star.alpha})`;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
+        // Using fillRect instead of arc for massive performance boost on mobile
+        ctx.fillRect(star.x - star.size / 2, star.y - star.size / 2, star.size, star.size);
       });
 
       // Shooting stars
