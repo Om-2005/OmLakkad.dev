@@ -52,7 +52,7 @@ Ensure you have **Node.js 18+** and **npm** installed on your system.
    ```
    Modify `.env.local` to match your specific API keys:
    ```env
-   NEXT_PUBLIC_APP_URL=https://omlakkad.dev
+   NEXT_PUBLIC_APP_URL=https://om-lakkad-dev.vercel.app
    NEXT_PUBLIC_FORM_ENDPOINT=https://api.web3forms.com/submit
    NEXT_PUBLIC_FORM_ACCESS_KEY=your-access-key-here
    ```
