@@ -107,7 +107,8 @@ export function GalaxyBackground() {
 
     const initStars = () => {
       stars = [];
-      const numStars = Math.floor((canvas.width * canvas.height) / 4500);
+      const isMobile = window.innerWidth < 768;
+      const numStars = isMobile ? 30 : Math.floor((canvas.width * canvas.height) / 4500);
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
       const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
@@ -149,6 +150,14 @@ export function GalaxyBackground() {
 
     // ── Draw realistic moon with craters ─────────────────────────────────────
     const drawMoon = (x: number, y: number, r: number) => {
+      if (window.innerWidth < 768) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(190, 200, 225, 0.9)";
+        ctx.fill();
+        return;
+      }
+
       // Outer atmospheric glow
       const atmosGlow = ctx.createRadialGradient(x, y, r * 0.9, x, y, r * 1.6);
       atmosGlow.addColorStop(0, "rgba(200, 215, 255, 0.07)");
@@ -220,6 +229,14 @@ export function GalaxyBackground() {
     };
 
     const drawSun = (x: number, y: number, r: number) => {
+      if (window.innerWidth < 768) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 235, 130, 0.9)";
+        ctx.fill();
+        return;
+      }
+
       // Massive Outer Glow covering the page
       const maxGlow = Math.max(canvas.width, canvas.height);
       const glow = ctx.createRadialGradient(x, y, r * 0.5, x, y, maxGlow);
@@ -308,7 +325,7 @@ export function GalaxyBackground() {
       }
 
       const now = Date.now();
-      if (now - lastShootingStarTime > 2000 && Math.random() < 0.02 && shootingStars.length < 1) {
+      if (window.innerWidth >= 768 && now - lastShootingStarTime > 2000 && Math.random() < 0.02 && shootingStars.length < 1) {
         createShootingStar();
         lastShootingStarTime = now;
       }
