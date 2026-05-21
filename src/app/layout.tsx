@@ -30,11 +30,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: PORTFOLIO_DATA.personalInfo.name }],
   creator: PORTFOLIO_DATA.personalInfo.name,
-  metadataBase: new URL("https://omlakkad.dev"),
+  metadataBase: new URL("https://om-lakkad-dev.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://omlakkad.dev",
+    url: "https://om-lakkad-dev.vercel.app",
     title: `${PORTFOLIO_DATA.personalInfo.name} | Full Stack Developer & AI Engineer`,
     description: `Explore the portfolio of ${PORTFOLIO_DATA.personalInfo.name}, showcasing flagship AI agents, cloud architectures, and IoT automation systems.`,
     siteName: `${PORTFOLIO_DATA.personalInfo.name} Portfolio`,
