@@ -1,8 +1,8 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://omlakkad.dev"; // Primary production URL
-  
+  const baseUrl = "https://om-lakkad-dev.vercel.app"; // Primary production URL
+
   return [
     {
       url: baseUrl,
