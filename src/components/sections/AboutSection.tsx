@@ -131,7 +131,7 @@ export function AboutSection() {
           </div>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
           {cards.map((card, idx) => (
             <motion.div 
               key={idx} 
@@ -139,24 +139,24 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className="group glass-panel rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-500 min-h-[350px]"
+              className="group glass-panel rounded-2xl md:rounded-3xl p-5 md:p-8 relative overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-500 md:min-h-[350px]"
             >
               {/* Backlight effect */}
               <div className={`absolute inset-0 bg-gradient-to-br ${card.glow} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
               
               <div className="space-y-6 relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">
+                  <div className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">
                     {card.icon}
                   </div>
-                  <span className="text-5xl font-extrabold font-mono opacity-10 group-hover:opacity-30 group-hover:scale-110 transition-all duration-500 select-none">
+                  <span className="text-4xl md:text-5xl font-extrabold font-mono opacity-10 group-hover:opacity-30 group-hover:scale-110 transition-all duration-500 select-none">
                     {card.num}
                   </span>
                 </div>
                 
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight group-hover:text-primary transition-colors">{card.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-md font-medium">
+                <div className="space-y-2 md:space-y-3">
+                  <h3 className="text-xl md:text-2xl font-bold tracking-tight group-hover:text-primary transition-colors">{card.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-md font-medium">
                     {card.desc}
                   </p>
                 </div>
