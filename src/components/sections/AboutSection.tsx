@@ -63,15 +63,15 @@ export function AboutSection() {
           </h2>
         </div>
         
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 border-b border-white/10 pb-12">
-          <div className="flex flex-col lg:w-[45%] sticky top-24">
-            {/* Interactive Graphic & Photo (Moved from Hero) */}
-            <div className="flex items-center justify-center w-full">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 lg:gap-12 border-b border-white/10 pb-12">
+          <div className="flex flex-col lg:w-[45%] lg:sticky lg:top-24">
+            {/* Interactive Graphic & Photo */}
+            <div className="flex items-center justify-center w-full pb-6 lg:pb-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] max-w-full"
+                className="relative w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] max-w-full"
               >
                 {/* Outer Glow */}
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 via-purple-500/20 to-pink-500/20 blur-[40px] opacity-70" />
