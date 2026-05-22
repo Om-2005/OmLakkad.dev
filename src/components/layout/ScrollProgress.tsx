@@ -46,7 +46,9 @@ export function ScrollProgress() {
         animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0 }}
         transition={{ duration: 0.3 }}
         onClick={scrollToTop}
-        className={`fixed bottom-6 right-6 w-12 h-12 rounded-full glass-panel flex items-center justify-center text-primary z-50 hover:bg-primary/20 transition-colors ${!isVisible ? 'pointer-events-none' : ''}`}
+        aria-label="Back to top"
+        style={{ touchAction: "manipulation" }}
+        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full glass-panel flex items-center justify-center text-primary z-[200] hover:bg-primary/20 transition-colors ${!isVisible ? 'pointer-events-none' : 'pointer-events-auto'}`}
       >
         <ArrowUp className="w-5 h-5" />
       </motion.button>

@@ -5,12 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
+  const [blockInteraction, setBlockInteraction] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1200);
-    return () => clearTimeout(timer);
+    // Stop blocking touches after 1200ms (when loading visually ends)
+    const interactionTimer = setTimeout(() => setBlockInteraction(false), 1200);
+    // Remove element from DOM after exit animation completes (1200 + 800ms)
+    const loadingTimer = setTimeout(() => setIsLoading(false), 2000);
+    return () => {
+      clearTimeout(interactionTimer);
+      clearTimeout(loadingTimer);
+    };
   }, []);
 
   return (
@@ -20,7 +25,7 @@ export function LoadingScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: "-100%" }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className={`fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-background ${!isLoading ? 'pointer-events-none' : ''}`}
+          className={`fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-background ${!blockInteraction ? 'pointer-events-none' : ''}`}
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -28,7 +33,7 @@ export function LoadingScreen() {
             transition={{ duration: 0.5 }}
             className="relative flex items-center justify-center w-44 h-44"
           >
-            {/* Outer spinning ring — no text, just the arc border */}
+            {/* Outer spinning ring */}
             <motion.svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 176 176"
@@ -56,7 +61,7 @@ export function LoadingScreen() {
               }}
             />
 
-            {/* Static name in center — does NOT rotate */}
+            {/* Static name in center */}
             <div className="flex flex-col items-center justify-center z-10 select-none">
               <span className="text-base font-extrabold font-mono tracking-widest text-primary glow-text leading-tight">
                 OMKUMAR
