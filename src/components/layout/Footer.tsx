@@ -50,7 +50,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="relative border-t border-white/10 bg-background/60 backdrop-blur-xl py-16 mt-28 overflow-hidden">
+      <footer className="relative border-t border-white/10 bg-background/60 backdrop-blur-sm md:backdrop-blur-xl py-16 mt-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent pointer-events-none" />
 
         <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col gap-12 max-w-7xl">

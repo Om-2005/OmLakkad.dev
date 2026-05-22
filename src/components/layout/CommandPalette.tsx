@@ -7,8 +7,17 @@ import { Search, FileText, Briefcase, Mail, Award, X } from "lucide-react";
 export function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
@@ -20,7 +29,7 @@ export function CommandPalette() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isMobile]);
 
   const commands = [
     { name: "View Projects", icon: <Briefcase className="w-4 h-4" />, action: () => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }) },
@@ -32,6 +41,8 @@ export function CommandPalette() {
   const filteredCommands = commands.filter((cmd) => 
     cmd.name.toLowerCase().includes(query.toLowerCase())
   );
+
+  if (isMobile) return null;
 
   return (
     <>

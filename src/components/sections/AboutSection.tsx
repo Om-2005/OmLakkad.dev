@@ -1,10 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code2, Brain, Cpu, Database, Cloud, Terminal } from "lucide-react";
 
 export function AboutSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   const cards = [
     {
       num: "01",
@@ -70,29 +78,29 @@ export function AboutSection() {
 
                 {/* Rotating ring */}
                 <motion.div
-                  animate={{ rotate: 360 }}
+                  animate={isMobile ? {} : { rotate: 360 }}
                   transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
                   className="absolute inset-5 rounded-full border border-primary/60 border-dashed border-2"
                 />
 
                 {/* Tech Icons - Fixed positions, floating up and down */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 flex justify-center items-center z-20">
-                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="p-3 bg-background/90 backdrop-blur-md border border-primary/30 rounded-2xl text-primary shadow-lg shadow-primary/20"><Code2 className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="p-3 bg-background/90 backdrop-blur-md border border-primary/30 rounded-2xl text-primary shadow-lg shadow-primary/20"><Code2 className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute top-1/4 right-3 flex justify-center items-center z-20">
-                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-purple-500/30 rounded-2xl text-purple-500 shadow-lg shadow-purple-500/20"><Brain className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-purple-500/30 rounded-2xl text-purple-500 shadow-lg shadow-purple-500/20"><Brain className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute bottom-1/4 right-3 flex justify-center items-center z-20">
-                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="p-3 bg-background/90 backdrop-blur-md border border-blue-500/30 rounded-2xl text-blue-500 shadow-lg shadow-blue-500/20"><Cpu className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="p-3 bg-background/90 backdrop-blur-md border border-blue-500/30 rounded-2xl text-blue-500 shadow-lg shadow-blue-500/20"><Cpu className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center z-20">
-                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-green-500/30 rounded-2xl text-green-500 shadow-lg shadow-green-500/20"><Database className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-green-500/30 rounded-2xl text-green-500 shadow-lg shadow-green-500/20"><Database className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute bottom-1/4 left-3 flex justify-center items-center z-20">
-                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="p-3 bg-background/90 backdrop-blur-md border border-indigo-500/30 rounded-2xl text-indigo-500 shadow-lg shadow-indigo-500/20"><Cloud className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="p-3 bg-background/90 backdrop-blur-md border border-indigo-500/30 rounded-2xl text-indigo-500 shadow-lg shadow-indigo-500/20"><Cloud className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute top-1/4 left-3 flex justify-center items-center z-20">
-                  <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-rose-500/30 rounded-2xl text-rose-500 shadow-lg shadow-rose-500/20"><Terminal className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-rose-500/30 rounded-2xl text-rose-500 shadow-lg shadow-rose-500/20"><Terminal className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
 
                 {/* Center Photo Container */}

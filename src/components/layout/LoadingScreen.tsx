@@ -9,7 +9,7 @@ export function LoadingScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -20,7 +20,7 @@ export function LoadingScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: "-100%" }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-background"
+          className={`fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-background ${!isLoading ? 'pointer-events-none' : ''}`}
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
