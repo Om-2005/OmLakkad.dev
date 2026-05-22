@@ -66,7 +66,8 @@ export function AboutSection() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 lg:gap-12 border-b border-white/10 pb-12">
           <div className="flex flex-col lg:w-[45%] lg:sticky lg:top-24">
             {/* Interactive Graphic & Photo */}
-            <div className="flex items-center justify-center w-full pb-6 lg:pb-0">
+            {/* Extra padding on mobile to contain absolutely-positioned icons that overflow the circular div */}
+            <div className="flex items-center justify-center w-full px-10 pt-4 pb-14 lg:px-0 lg:pt-0 lg:pb-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -83,7 +84,7 @@ export function AboutSection() {
                   className="absolute inset-5 rounded-full border border-primary/60 border-dashed border-2"
                 />
 
-                {/* Tech Icons - Fixed positions, floating up and down */}
+                {/* Tech Icons - Fixed positions */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 flex justify-center items-center z-20">
                   <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="p-3 bg-background/90 backdrop-blur-md border border-primary/30 rounded-2xl text-primary shadow-lg shadow-primary/20"><Code2 className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
@@ -107,7 +108,6 @@ export function AboutSection() {
                 <div className="absolute inset-[15%] sm:inset-[12%] rounded-full bg-background border border-white/10 flex items-center justify-center p-2 shadow-2xl">
                   <div className="w-full h-full rounded-full overflow-hidden relative group bg-gradient-to-tr from-primary/10 to-purple-500/10">
                     <img src="/profile.jpg" alt="Omkumar Lakkad" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 sm:pb-10">
                       <span className="font-mono text-sm font-bold text-primary tracking-widest">&lt;engineer /&gt;</span>
@@ -118,7 +118,7 @@ export function AboutSection() {
             </div>
           </div>
           
-          <div className="text-muted-foreground text-md sm:text-lg max-w-3xl leading-relaxed space-y-6 lg:w-[55%]">
+          <div className="relative z-10 text-muted-foreground text-md sm:text-lg max-w-3xl leading-relaxed space-y-6 lg:w-[55%]">
             <p>
               Hello, I&apos;m Omkumar Lakkad — a creative Software Engineer, Full Stack Developer, and AI Enthusiast passionate about building modern digital products that combine elegant design, strong performance, and seamless user experience. I specialize in transforming ideas into scalable web applications and intelligent solutions using cutting-edge technologies.
             </p>
