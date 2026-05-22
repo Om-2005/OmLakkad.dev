@@ -93,7 +93,7 @@ export function Footer() {
               >
                 &copy; {currentYear} OmLakkad.dev. All rights reserved.
               </button>
-              <p className="text-xs font-mono text-muted-foreground/50">V 2.1.0 // ENV: PROD</p>
+              <p className="text-xs font-mono text-muted-foreground/50">V 2.1.0</p>
             </div>
 
             <div className="flex items-center gap-6">
