@@ -90,7 +90,7 @@ export default function RootLayout({
           <GalaxyBackground />
 
           {/* Animated Background Blobs */}
-          <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+          <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1] hidden md:block">
             <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/25 blur-[140px] mix-blend-screen animate-blob" />
             <div className="absolute top-[25%] right-[-10%] w-[45%] h-[45%] rounded-full bg-purple-500/25 blur-[140px] mix-blend-screen animate-blob-2" />
             <div className="absolute bottom-[-10%] left-[15%] w-[55%] h-[55%] rounded-full bg-pink-500/25 blur-[140px] mix-blend-screen animate-blob-3" />

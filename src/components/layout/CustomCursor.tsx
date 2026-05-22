@@ -9,9 +9,12 @@ export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only enable custom cursor if the device has a mouse/pointer
+    // Only enable custom cursor if the device has a mouse/pointer and is not mobile
     const hasMouse = window.matchMedia("(pointer: fine)").matches;
-    if (!hasMouse) return;
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isMobile = window.innerWidth < 768;
+    
+    if (!hasMouse || isTouchDevice || isMobile) return;
 
     setIsVisible(true);
 

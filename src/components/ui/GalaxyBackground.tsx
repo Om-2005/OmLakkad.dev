@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
 interface Star {
@@ -38,8 +38,18 @@ interface Moon {
 export function GalaxyBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { resolvedTheme } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -107,8 +117,7 @@ export function GalaxyBackground() {
 
     const initStars = () => {
       stars = [];
-      const isMobile = window.innerWidth < 768;
-      const numStars = isMobile ? 30 : Math.floor((canvas.width * canvas.height) / 4500);
+      const numStars = Math.floor((canvas.width * canvas.height) / 4500);
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
       const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
@@ -150,14 +159,6 @@ export function GalaxyBackground() {
 
     // ── Draw realistic moon with craters ─────────────────────────────────────
     const drawMoon = (x: number, y: number, r: number) => {
-      if (window.innerWidth < 768) {
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(190, 200, 225, 0.9)";
-        ctx.fill();
-        return;
-      }
-
       // Outer atmospheric glow
       const atmosGlow = ctx.createRadialGradient(x, y, r * 0.9, x, y, r * 1.6);
       atmosGlow.addColorStop(0, "rgba(200, 215, 255, 0.07)");
@@ -229,14 +230,6 @@ export function GalaxyBackground() {
     };
 
     const drawSun = (x: number, y: number, r: number) => {
-      if (window.innerWidth < 768) {
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 235, 130, 0.9)";
-        ctx.fill();
-        return;
-      }
-
       // Massive Outer Glow covering the page
       const maxGlow = Math.max(canvas.width, canvas.height);
       const glow = ctx.createRadialGradient(x, y, r * 0.5, x, y, maxGlow);
@@ -325,7 +318,7 @@ export function GalaxyBackground() {
       }
 
       const now = Date.now();
-      if (window.innerWidth >= 768 && now - lastShootingStarTime > 2000 && Math.random() < 0.02 && shootingStars.length < 1) {
+      if (now - lastShootingStarTime > 2000 && Math.random() < 0.02 && shootingStars.length < 1) {
         createShootingStar();
         lastShootingStarTime = now;
       }
@@ -342,7 +335,9 @@ export function GalaxyBackground() {
       window.removeEventListener("mousemove", onMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [resolvedTheme]);
+  }, [resolvedTheme, isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <canvas

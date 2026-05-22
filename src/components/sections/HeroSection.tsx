@@ -69,8 +69,8 @@ export function HeroSection() {
           <div className="flex flex-col items-center text-center space-y-8 max-w-4xl">
             <div className="space-y-4 w-full flex flex-col items-center">
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[1.1] font-extrabold tracking-tighter"
               >
@@ -79,8 +79,8 @@ export function HeroSection() {
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-lg md:text-xl text-muted-foreground font-medium tracking-wide mt-6"
               >
@@ -88,8 +88,8 @@ export function HeroSection() {
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="text-2xl sm:text-3xl font-bold flex items-center gap-3 mt-4"
               >
@@ -98,9 +98,9 @@ export function HeroSection() {
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={currentTitleIndex}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
                       className="text-primary"
                     >
@@ -116,8 +116,8 @@ export function HeroSection() {
               </motion.div>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed mt-6"
               >
@@ -126,8 +126,8 @@ export function HeroSection() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
               className="flex flex-wrap items-center justify-center gap-4 w-full pt-4"
             >
@@ -150,8 +150,8 @@ export function HeroSection() {
         </div>
         {/* Stats Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mt-20 pt-12 border-t border-white/5"
         >
