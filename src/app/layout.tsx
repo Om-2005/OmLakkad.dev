@@ -75,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning className="scroll-smooth overflow-x-hidden">
       <body className={`${inter.className} min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary/30 selection:text-primary overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
@@ -97,7 +97,7 @@ export default function RootLayout({
             <div className="absolute bottom-[30%] right-[10%] w-[40%] h-[40%] rounded-full bg-cyan-500/20 blur-[140px] mix-blend-screen animate-blob" style={{ animationDelay: '5s' }} />
           </div>
 
-          <div className="relative flex min-h-screen flex-col">
+          <div className="relative flex min-h-screen flex-col overflow-x-hidden">
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />

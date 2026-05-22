@@ -38,7 +38,7 @@ export function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-28 relative">
+    <section id="about" className="py-28 relative overflow-x-hidden">
       {/* Background ambient blobs */}
       <div className="absolute right-0 top-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-purple-500/5 blur-[120px]" />
       <div className="absolute left-0 bottom-1/4 -z-10 h-[350px] w-[350px] rounded-full bg-primary/5 blur-[100px]" />
