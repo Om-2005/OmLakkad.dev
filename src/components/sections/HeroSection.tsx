@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Mail, Eye } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { PORTFOLIO_DATA } from "@/constants/data";
 
 const AnimatedCounter = ({ value, label }: { value: number; label: string }) => {
@@ -31,13 +31,13 @@ const AnimatedCounter = ({ value, label }: { value: number; label: string }) => 
   );
 };
 
-const statsContainerVariants = {
+const statsContainerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
 };
-const statsItemVariants = {
+const statsItemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export function HeroSection() {

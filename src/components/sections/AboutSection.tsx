@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, type Transition, type Variants } from "framer-motion";
 import { Code2, Brain, Cpu, Database, Cloud, Terminal } from "lucide-react";
 
 // Stagger variants for mobile-friendly reveal
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export function AboutSection() {
@@ -49,12 +49,12 @@ export function AboutSection() {
   ];
 
   // Floating icon animation — lighter on mobile (smaller range, slower)
-  const floatAnim = (delay: number) => ({
+  const floatAnim = (delay: number): { animate: { y: number[] }; transition: Transition } => ({
     animate: { y: isMobile ? [0, -5, 0] : [0, -10, 0] },
     transition: {
       duration: isMobile ? 5 : 4,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
       delay,
     },
   });

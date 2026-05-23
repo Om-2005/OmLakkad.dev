@@ -1,17 +1,17 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Award, Trophy, Sparkles, Server, Cpu, GraduationCap, Building2, ExternalLink } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/constants/data";
 
-const listContainerVariants = {
+const listContainerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
-const listItemVariants = {
+const listItemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
 };
 
 export function CertificationsSection() {
