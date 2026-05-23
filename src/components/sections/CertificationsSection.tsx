@@ -5,6 +5,15 @@ import { motion } from "framer-motion";
 import { Award, Trophy, Sparkles, Server, Cpu, GraduationCap, Building2, ExternalLink } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/constants/data";
 
+const listContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+const listItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
 export function CertificationsSection() {
   const { certifications, achievements } = PORTFOLIO_DATA;
 
@@ -56,9 +65,15 @@ export function CertificationsSection() {
               Certifications & Simulations
             </h3>
 
-            <div className="space-y-10">
+            <motion.div
+              className="space-y-10"
+              variants={listContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.05 }}
+            >
               {certifications?.map((certGroup, idx) => (
-                <div key={idx} className="space-y-4">
+                <motion.div key={idx} variants={listItemVariants} className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-xl glass-panel border border-white/10">
                       {getCategoryIcon(certGroup.category)}
@@ -69,10 +84,10 @@ export function CertificationsSection() {
                   <div className="grid gap-3">
                     {certGroup.items.map((item, itemIdx) => {
                       const hasLink = !!item.link;
-
                       const cardContent = (
                         <motion.div
                           whileHover={{ scale: hasLink ? 1.015 : 1 }}
+                          whileTap={{ scale: hasLink ? 0.97 : 1 }}
                           className={`flex items-center justify-between gap-4 py-[20.73px] px-5 rounded-2xl border glass-panel transition-all duration-300 group ${hasLink
                             ? "hover:border-primary/40 hover:shadow-[0_0_20px_rgba(var(--primary),0.06)] cursor-pointer"
                             : "cursor-not-allowed opacity-70"
@@ -82,33 +97,24 @@ export function CertificationsSection() {
                             <span className="text-[15px] font-mono text-primary font-bold uppercase tracking-widest">{item.issuer}</span>
                             <h5 className="font-extrabold text-foreground text-sm md:text-[15px] leading-snug group-hover:text-primary transition-colors">{item.title}</h5>
                           </div>
-
                           {hasLink && (
                             <ExternalLink className="w-4 h-4 text-primary opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all shrink-0" />
                           )}
                         </motion.div>
                       );
-
                       if (hasLink) {
                         return (
-                          <a
-                            key={itemIdx}
-                            href={item.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block focus:outline-none"
-                          >
+                          <a key={itemIdx} href={item.link} target="_blank" rel="noopener noreferrer" className="block focus:outline-none">
                             {cardContent}
                           </a>
                         );
                       }
-
                       return <div key={itemIdx}>{cardContent}</div>;
                     })}
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Key Achievements Timeline (Col 5) */}
@@ -118,14 +124,18 @@ export function CertificationsSection() {
               Key Achievements
             </h3>
 
-            <div className="grid gap-4">
+            <motion.div
+              className="grid gap-4"
+              variants={listContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
               {achievements?.map((achievement, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  variants={listItemVariants}
+                  whileTap={{ scale: 0.97 }}
                   className="glass-panel rounded-2xl p-6 flex items-start gap-4 group hover:border-primary/30 transition-all duration-300"
                 >
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20 group-hover:scale-105 group-hover:bg-primary/20 transition-all duration-300">
@@ -139,7 +149,7 @@ export function CertificationsSection() {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

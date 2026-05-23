@@ -4,6 +4,16 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Layout, Database, Cpu, BrainCircuit } from "lucide-react";
 
+// Stagger variants
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export function SkillsSection() {
   const skillCategories = [
     {
@@ -83,14 +93,19 @@ export function SkillsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Stagger reveal grid */}
+        <motion.div
+          className="grid md:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {skillCategories.map((category, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              variants={cardVariants}
+              whileTap={{ scale: 0.98 }}
               className={`glass-panel rounded-3xl p-8 space-y-8 relative overflow-hidden group transition-all duration-500 hover:border-primary/20 ${category.glow}`}
             >
               <div className="flex items-center justify-between border-b border-white/5 pb-4">
@@ -123,7 +138,7 @@ export function SkillsSection() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

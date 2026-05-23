@@ -5,6 +5,15 @@ import { motion } from "framer-motion";
 import { GraduationCap, BookOpen, Calendar, Building2 } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/constants/data";
 
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+const itemVariants = {
+  hidden: { opacity: 0, x: -24 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export function EducationSection() {
   const { education } = PORTFOLIO_DATA;
 
@@ -43,14 +52,18 @@ export function EducationSection() {
           {/* Vertical timeline line */}
           <div className="absolute left-8 top-16 bottom-0 w-px bg-gradient-to-b from-primary/40 via-purple-500/20 to-transparent hidden md:block" />
 
-          <div className="space-y-10">
+          <motion.div
+            className="space-y-10"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {education?.map((edu, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
+                variants={itemVariants}
+                whileTap={{ scale: 0.98 }}
                 className="relative flex gap-6 md:gap-10"
               >
                 {/* Timeline dot */}
@@ -118,7 +131,7 @@ export function EducationSection() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

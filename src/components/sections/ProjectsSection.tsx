@@ -69,8 +69,9 @@ export function ProjectsSection() {
 
           <div className="flex flex-nowrap gap-2 overflow-x-auto max-w-full pb-2 scrollbar-none">
             {categories.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
+                whileTap={{ scale: 0.92 }}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3 py-1.5 rounded-xl text-[10px] sm:text-xs font-bold whitespace-nowrap transition-all duration-300 border uppercase tracking-wider ${activeCategory === cat
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 border-primary/50"
@@ -78,7 +79,7 @@ export function ProjectsSection() {
                   }`}
               >
                 {cat}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -94,6 +95,7 @@ export function ProjectsSection() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
+                  whileTap={{ scale: 0.97 }}
                   transition={{ duration: 0.4 }}
                   className={`group glass-panel rounded-3xl overflow-hidden flex flex-col cursor-pointer transition-all duration-500 hover:border-primary/40 ${isFlagship
                       ? "md:col-span-2 lg:col-span-2 border border-primary/30 shadow-[0_0_40px_rgba(59,130,246,0.15)] bg-gradient-to-br from-primary/5 to-purple-500/5"

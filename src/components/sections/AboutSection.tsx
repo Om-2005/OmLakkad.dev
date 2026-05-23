@@ -4,6 +4,16 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code2, Brain, Cpu, Database, Cloud, Terminal } from "lucide-react";
 
+// Stagger variants for mobile-friendly reveal
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export function AboutSection() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -13,6 +23,7 @@ export function AboutSection() {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
   const cards = [
     {
       num: "01",
@@ -36,6 +47,17 @@ export function AboutSection() {
       glow: "from-green-500/20 to-transparent",
     },
   ];
+
+  // Floating icon animation — lighter on mobile (smaller range, slower)
+  const floatAnim = (delay: number) => ({
+    animate: { y: isMobile ? [0, -5, 0] : [0, -10, 0] },
+    transition: {
+      duration: isMobile ? 5 : 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay,
+    },
+  });
 
   return (
     <section id="about" className="py-28 relative overflow-x-hidden">
@@ -77,31 +99,31 @@ export function AboutSection() {
                 {/* Outer Glow */}
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 via-purple-500/20 to-pink-500/20 blur-[40px] opacity-70" />
 
-                {/* Rotating ring */}
+                {/* Rotating ring — enabled on mobile too but slower */}
                 <motion.div
-                  animate={isMobile ? {} : { rotate: 360 }}
-                  transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: isMobile ? 60 : 45, repeat: Infinity, ease: "linear" }}
                   className="absolute inset-5 rounded-full border border-primary/60 border-dashed border-2"
                 />
 
-                {/* Tech Icons - Fixed positions */}
+                {/* Tech Icons - Fixed positions — float animation enabled on mobile (lighter) */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 flex justify-center items-center z-20">
-                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="p-3 bg-background/90 backdrop-blur-md border border-primary/30 rounded-2xl text-primary shadow-lg shadow-primary/20"><Code2 className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div {...floatAnim(0)} className="p-3 bg-background/90 backdrop-blur-md border border-primary/30 rounded-2xl text-primary shadow-lg shadow-primary/20"><Code2 className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute top-1/4 right-3 flex justify-center items-center z-20">
-                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-purple-500/30 rounded-2xl text-purple-500 shadow-lg shadow-purple-500/20"><Brain className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div {...floatAnim(0.5)} className="p-3 bg-background/90 backdrop-blur-md border border-purple-500/30 rounded-2xl text-purple-500 shadow-lg shadow-purple-500/20"><Brain className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute bottom-1/4 right-3 flex justify-center items-center z-20">
-                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="p-3 bg-background/90 backdrop-blur-md border border-blue-500/30 rounded-2xl text-blue-500 shadow-lg shadow-blue-500/20"><Cpu className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div {...floatAnim(1)} className="p-3 bg-background/90 backdrop-blur-md border border-blue-500/30 rounded-2xl text-blue-500 shadow-lg shadow-blue-500/20"><Cpu className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center z-20">
-                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-green-500/30 rounded-2xl text-green-500 shadow-lg shadow-green-500/20"><Database className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div {...floatAnim(1.5)} className="p-3 bg-background/90 backdrop-blur-md border border-green-500/30 rounded-2xl text-green-500 shadow-lg shadow-green-500/20"><Database className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute bottom-1/4 left-3 flex justify-center items-center z-20">
-                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="p-3 bg-background/90 backdrop-blur-md border border-indigo-500/30 rounded-2xl text-indigo-500 shadow-lg shadow-indigo-500/20"><Cloud className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div {...floatAnim(2)} className="p-3 bg-background/90 backdrop-blur-md border border-indigo-500/30 rounded-2xl text-indigo-500 shadow-lg shadow-indigo-500/20"><Cloud className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
                 <div className="absolute top-1/4 left-3 flex justify-center items-center z-20">
-                  <motion.div animate={isMobile ? {} : { y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2.5 }} className="p-3 bg-background/90 backdrop-blur-md border border-rose-500/30 rounded-2xl text-rose-500 shadow-lg shadow-rose-500/20"><Terminal className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
+                  <motion.div {...floatAnim(2.5)} className="p-3 bg-background/90 backdrop-blur-md border border-rose-500/30 rounded-2xl text-rose-500 shadow-lg shadow-rose-500/20"><Terminal className="w-4 h-4 sm:w-5 sm:h-5" /></motion.div>
                 </div>
 
                 {/* Center Photo Container */}
@@ -131,14 +153,19 @@ export function AboutSection() {
           </div>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
+        {/* Cards with stagger reveal + whileTap */}
+        <motion.div
+          className="grid md:grid-cols-3 gap-4 md:gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {cards.map((card, idx) => (
             <motion.div 
-              key={idx} 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.15 }}
+              key={idx}
+              variants={itemVariants}
+              whileTap={{ scale: 0.97 }}
               className="group glass-panel rounded-2xl md:rounded-3xl p-5 md:p-8 relative overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-500 md:min-h-[350px]"
             >
               {/* Backlight effect */}
@@ -163,7 +190,7 @@ export function AboutSection() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );
