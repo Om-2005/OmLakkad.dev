@@ -74,7 +74,7 @@ export function Navbar() {
       >
         <div className="container mx-auto px-4 md:px-6">
           <div className={`mx-auto flex items-center justify-between gap-x-4 flex-nowrap transition-all duration-500 ${isScrolled
-            ? "max-w-6xl bg-background/80 backdrop-blur-sm md:backdrop-blur-xl border border-border/30 shadow-2xl rounded-full px-6 py-2.5"
+            ? "max-w-6xl bg-background/10 backdrop-blur-sm md:backdrop-blur-xl border border-border/30 shadow-2xl rounded-full px-6 py-2.5"
             : "max-w-7xl"
             }`}>
 

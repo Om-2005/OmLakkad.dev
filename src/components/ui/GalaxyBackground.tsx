@@ -107,7 +107,7 @@ export function GalaxyBackground() {
       moon.baseY = pad;                  // hug the top edge
       moon.currentX = moon.baseX;
       moon.currentY = moon.baseY;
-      
+
       // Prevent re-initializing stars on mobile scroll (where only height changes slightly due to URL bar)
       if (lastWidth !== newWidth) {
         initStars();
@@ -247,7 +247,7 @@ export function GalaxyBackground() {
       core.addColorStop(0, "rgba(255, 255, 255, 0.5)");
       core.addColorStop(0.4, "rgba(255, 235, 130, 0.9)");
       core.addColorStop(1, "rgba(255, 190, 40, 0.85)");
-      
+
       ctx.beginPath();
       ctx.arc(x, y, r, 0, Math.PI * 2);
       ctx.fillStyle = core;
